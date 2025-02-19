@@ -1,0 +1,16 @@
+{% extends "hr_assist/base.html" %}
+
+{% block content %}
+    <p>従業員一覧<p>
+
+    <ul>
+        {% for employee in employees %}
+            <li>
+                <a href="{% url 'hr_assist:employee' employee.id %}">{{ employee }}</a>
+            </li>
+        {% empty %}
+            <li>従業員はまだ登録されておりません</li>
+        {% endfor %}
+    </ul>
+    
+{% endblock content %}

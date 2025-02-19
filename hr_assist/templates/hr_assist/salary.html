@@ -1,0 +1,61 @@
+{% extends 'hr_assist/base.html' %}
+{% load humanize %}
+
+{% block content %}
+<h2>{{ employee }} の給与明細 ({{ paymonth|slice:":4" }}年{{ paymonth|slice:"5:" }}月)</h2>
+
+<!-- 支給年月を選択 -->
+<form method="get" action="{% url 'hr_assist:salary' emp_id=employee.id paymonth=paymonth %}">
+  <label for="paymonth">支給年月を選択:</label>
+  <select name="paymonth" id="paymonth">
+      <option value="">-- 選択してください --</option>
+      {% for month in paymonths %}
+          <option value="{{ month.paymonth }}" {% if month.paymonth == paymonth %}selected{% endif %}>
+              {{ month.paymonth }}
+          </option>
+      {% endfor %}
+  </select>
+</form>
+
+<script>
+  document.getElementById("paymonth").addEventListener("change", function() {
+      let selectedMonth = this.value;
+      if (selectedMonth) {
+          window.location.href = `{% url 'hr_assist:salary' emp_id=employee.id paymonth='PLACEHOLDER' %}`.replace("PLACEHOLDER", selectedMonth);
+      }
+  });
+</script>
+
+<p>
+  基本給 {{ employee.basic_salary|intcomma }}円
+</p>
+
+<h3>手当</h3>
+<ul>
+  {% for allowance in allowances %}
+    {% if allowance.amount > 0 %}
+      <li>{{ allowance.name }} {{ allowance.amount|intcomma }}円</li>
+    {% endif %}
+  {% empty %}
+    <li>no data</li>
+  {% endfor %}
+  差引給与額 {{ total_allowance|intcomma }}円
+</ul>
+
+<h3>控除</h3>
+<ul>
+  {% for allowance in allowances %}
+    {% if allowance.amount < 0 %}
+      <li>{{ allowance.name }} {{ allowance.amount|intcomma }}円</li>
+    {% endif %}
+  {% empty %}
+    <li>no data</li>
+  {% endfor %}
+  合計 {{ total_deduction|intcomma }}円
+</ul>
+
+<p>
+  合計 {{ total_salary|intcomma }}円
+</p>
+
+{% endblock %}

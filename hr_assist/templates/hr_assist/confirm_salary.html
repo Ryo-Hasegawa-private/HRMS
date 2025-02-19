@@ -1,0 +1,36 @@
+{% extends "hr_assist/base.html" %}
+
+{% block content %}
+    <form action="{% url 'hr_assist:confirm_salary' emp_id=employee.id %}" method='post'>
+        {% csrf_token %}
+        <p>
+            <label for="employee">従業員:</label>
+            {{ form.employee }}
+        </p>
+        <p>
+            <label for="paymonth">支給年月:</label>
+            {{ form.paymonth }}
+        </p>
+        
+        <div id="allowance-container">
+            <div class="allowance-item">
+                <label for="name">手当・控除名:</label>
+                <select name="name">
+                    <option value="交通費">交通費</option>
+                    <option value="インセンティブ">インセンティブ</option>
+                    <option value="役職手当">役職手当</option>
+                    <option value="欠勤控除">欠勤控除</option>
+                    <option value="所得税">所得税</option>
+                    <option value="社会保障費">社会保障費</option>
+                </select><br>
+                
+                <label for="amount">手当・控除額:</label>
+                <input type="number" name="amount" required>
+                <small>控除の場合はマイナスにしてください</small>
+            </div>
+        </div>
+    
+        <button type="submit">送信</button>
+    </form>
+    
+{% endblock content %}

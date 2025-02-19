@@ -1,0 +1,20 @@
+{% extends "hr_assist/base.html" %}
+{% load humanize %}
+
+{% block content %}
+
+{{ graph_age|safe }}
+
+    <p>従業員数　{{ dic.total_employee }}人</p>
+    <p>平均年齢　{{ dic.average_age }}歳</p>
+    <p>最低年齢　{{ dic.min_age }}歳</p>
+    <p>最高年齢　{{ dic.max_age }}歳</p>
+
+{{ graph_gender|safe }}
+
+
+{{ graph_basic_salary|safe }}
+
+<p>平均基本給　{{ dic.average_basic_salary|intcomma }}円</p>
+
+{% endblock content %}

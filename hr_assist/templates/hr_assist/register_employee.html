@@ -1,0 +1,12 @@
+{% extends "hr_assist/base.html" %}
+
+{% block content %}
+    <p>従業員情報登録</p>
+
+    <form action="{% url 'hr_assist:register_employee' %}" method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name="submit">登録</button>
+    </form>
+
+{% endblock content %}
