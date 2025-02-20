@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+/* ナビゲーション */
+.navbar {
+    background-color: #8EB4E2;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    width: 100%;
+    max-width: 100%;
+}
+.nav-item .nav-link {
+    color: #ffffff !important;
+    font-size: 1.5rem;
+    font-family: "ＭＳ 明朝", serif;
+    font-weight: bold;
+    width: 100%;  /* 幅を100%に */
+    max-width: 200px;  /* 最大幅は200pxに制限 */
+}
+.btn-primary {
+    font-family: "ＭＳ 明朝", serif !important;
+    font-weight: bold !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    margin-right: 1rem !important;
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+/* ページヘッダー部分 */
+.hello {
+    font-size: 1.5rem;
+    margin-left: 1px;
+    margin-top: 1.5rem;
+}
+h3 {
+    margin-top: 1.5rem;
+    font-weight: bold;
+}
+
+/* ページコンテンツ部分 */
+.title {
+    text-align: center;
+    margin-top: 7rem;
+}
+.title .sub {
+    font-size: 1.5rem;
+}
+.title .main {
+    font-size: 3rem;
+}

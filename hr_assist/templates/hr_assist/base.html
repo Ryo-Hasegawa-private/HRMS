@@ -1,4 +1,5 @@
 {% load django_bootstrap5 %}
+{%  load static %}
 
 <!doctype html>
 <html lang="ja">
@@ -12,13 +13,13 @@
         {% bootstrap_css %}
 
         <!-- カスタムCSSファイル -->
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
         <!-- Bootstrap JS（Djangoで自動挿入）-->
         {% bootstrap_javascript %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 {% if user.is_authenticated %}
                     {% if user.is_staff %}
@@ -36,17 +37,22 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'hr_assist:insight' %}">インサイト</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'users:register' %}">登録</a>
-                                </li>
-                                <li class="nav-item-logout">
-                                    <form method="post" action="{% url 'users:logout' %}">
-                                        {% csrf_token %}
-                                        <button name="submit">ログアウト</button>
-                                    </form>
-                                </li>
                             </ul>
                         <div>
+                        <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-button-user-register ms-3"> 
+                                <form method="post" action="{% url 'users:register' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">登録</button>
+                                </form>
+                            </li>
+                            <li class="nav-button-logout ms-3">
+                                <form method="post" action="{% url 'users:logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">ログアウト</button>
+                                </form>
+                            </li>
+                        </div>
                     {% else %}
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -59,14 +65,16 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'hr_assist:salary' emp_id=request.user.username|add:'0' paymonth=this_month %}">給与明細</a>
                                 </li>
-                                <li class="nav-item">
-                                    <form method="post" action="{% url 'users:logout' %}">
-                                        {% csrf_token %}
-                                        <button name="submit">ログアウト</button>
-                                    </form>
-                                </li>
                             </ul>
                         <div>
+                        <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-button-logout ms-3">
+                                <form method="post" action="{% url 'users:logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">ログアウト</button>
+                                </form>
+                            </li>
+                        </div>
                     {% endif %}
                 {% else %}
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -74,11 +82,16 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{% url 'hr_assist:index' %}">人事労務くん</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'users:login' %}">ログイン</a>
-                            </li>
                         </ul>
                     <div>
+                    <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-button-login ms-3">
+                            <form method="post" action="{% url 'users:login' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">ログイン</button>
+                            </form>
+                        </li>
+                    </div>
                 {% endif %}
             </div>
         </nav>
@@ -87,55 +100,15 @@
             <div class="pb-2 mb-2">
                 {% block page_header %} {% endblock page_header %}
             </div>
+            <div>
                 {% if user.is_authenticated %}
-                    <p>
+                    <p class="hello">
                         ようこそ　{{ user.username }} 様
                     </p>
                 {% endif %}
-            <div>
                 {% block content %} {% endblock content %}
             </div>
         </main>
         
     </body>
 </html>
-
-<!--{% if user.is_authenticated %}
-    {% if user.is_staff %}
-        <p>
-            <a href="{% url 'hr_assist:index' %}">人事労務くん</a>
-            <a href="{% url 'hr_assist:register_employee' %}">従業員登録</a>
-            <a href="{% url 'hr_assist:employees' %}">従業員一覧</a>
-            <a href="{% url 'hr_assist:insight' %}">インサイト</a>
-            <a href="{% url 'users:register' %}">登録</a>
-            <form method="post" action="{% url 'users:logout' %}">
-                {% csrf_token %}
-                <button name="submit">ログアウト</button>
-            </form>
-        </p>
-        <p>
-            ようこそ　{{ user.username }} 様
-        <p>
-    {% else %}
-        <p>
-            <a href="{% url 'hr_assist:index' %}">人事労務くん</a>
-            <a href="{% url 'hr_assist:employee' emp_id=request.user.username|add:'0' %}">従業員情報</a>
-            <a href="{% url 'hr_assist:salary' emp_id=request.user.username|add:'0' paymonth=this_month %}">給与明細</a>
-            <form method="post" action="{% url 'users:logout' %}">
-                {% csrf_token %}
-                <button name="submit">ログアウト</button>
-            </form>
-        </p>
-        <p>
-            ようこそ　{{ user.username }} 様
-        <p>
-    {% endif %}
-{% else %}
-    <p>
-        <a href="{% url 'hr_assist:index' %}">人事労務くん</a>
-        <a href="{% url 'users:login' %}">ログイン</a>
-    </p>
-{% endif %}
-
-
--->
