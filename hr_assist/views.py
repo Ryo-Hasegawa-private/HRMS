@@ -129,12 +129,15 @@ def salary(request, emp_id, paymonth):
 @login_required
 def insight(request):
     """インサイト情報を表示する"""
+    # 退職済み以外の従業員をフィルタリング
+    active_employees = Employee.objects.exclude(status='LEAVED')  # 退職済み（LEAVED）を除外
+    
     # 年齢リストを取得
-    ages = [employee.calculate_age() for employee in Employee.objects.all()]
+    ages = [employee.calculate_age() for employee in active_employees]
     # 性別リストを取得
-    genders = [employee.gender for employee in Employee.objects.all()]
+    genders = [employee.gender for employee in active_employees]
     # 基本給リストを取得
-    basic_salaries = [employee.basic_salary for employee in Employee.objects.all()]
+    basic_salaries = [employee.basic_salary for employee in active_employees]
     
     # 男女の数を計算
     male_count = genders.count('男性')
