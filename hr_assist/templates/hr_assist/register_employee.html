@@ -1,12 +1,105 @@
 {% extends "hr_assist/base.html" %}
 
-{% block content %}
-    <p>従業員情報登録</p>
+{% block page_header%}
+    <h4>従業員情報登録</h4>
+    <hr>
+{% endblock page_header %}
 
-    <form action="{% url 'hr_assist:register_employee' %}" method='post'>
+{% block content %}
+
+<div class="form-container mb-3">
+    <form action="{% url 'hr_assist:register_employee' %}" method='post' class="register_employee">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button name="submit">登録</button>
+        
+            <!-- 姓　-->
+            <label for="{{ form.sei.id_for_label }}" class="form_label">姓</label>
+            {{ form.sei }}
+            {% if form.sei.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.sei.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %} 
+            &emsp;
+            <!-- 名　-->
+            <label for="{{ form.mei.id_for_label }}" class="form_label">名</label>
+            {{ form.mei }}
+            {% if form.mei.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.mei.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br><br><br>
+            <!-- 生年月日　-->
+            <label for="{{ form.birth_date.id_for_label }}" class="form_label">生年月日</label>
+            {{ form.birth_date }}
+            {% if form.birth_date.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.birth_date.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            &emsp;<small>2000-01-01 の形式で入力してください</small>
+            <br><br><br>
+            <!-- 性別　-->
+            <div class="gender">
+                <label for="{{ form.gender.id_for_label }}" class="form_label">性別</label>
+                    <div class="form-check form-check-inline">
+                        {{ form.gender.0 }}
+                    </div>
+                    <div class="form-check form-check-inline">
+                        {{ form.gender.1 }}
+                    </div>
+                {% if form.gender.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.gender.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <br><br>    
+            <!-- 基本給　-->
+            <label for="{{ form.basic_salary.id_for_label }}" class="form_label">基本給</label>
+            {{ form.basic_salary }} 円
+            {% if form.basic_salary.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.basic_salary.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br><br><br>
+            <!-- 入社日　-->
+            <label for="{{ form.joining_date.id_for_label }}" class="form_label">入社日</label>
+            {{ form.joining_date }}
+            {% if form.joining_date.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.joining_date.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            &emsp;<small>2000-01-01 の形式で入力してください</small>
+            <br><br><br>
+            <!-- ステータス　-->
+            <label for="{{ form.status.id_for_label }}" class="form_label">ステータス</label>
+            {{ form.status }}
+            {% if form.status.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.status.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br><br><br>
+        <button name="submit" class="btn btn-primary">登録</button>
+        <button type="reset" class="btn btn-custom">キャンセル</button>
     </form>
+</div>
 
 {% endblock content %}

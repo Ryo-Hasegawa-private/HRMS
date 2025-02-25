@@ -1,36 +1,50 @@
 {% extends "hr_assist/base.html" %}
 
+{% block page_header %}
+    <h4>
+        手当・控除の登録
+    </h4>
+    <hr>
+{% endblock page_header %}
+
 {% block content %}
-    <form action="{% url 'hr_assist:confirm_salary' emp_id=employee.id %}" method='post'>
-        {% csrf_token %}
-        <p>
-            <label for="employee">従業員:</label>
-            {{ form.employee }}
-        </p>
-        <p>
-            <label for="paymonth">支給年月:</label>
-            {{ form.paymonth }}
-        </p>
-        
-        <div id="allowance-container">
-            <div class="allowance-item">
-                <label for="name">手当・控除名:</label>
-                <select name="name">
-                    <option value="交通費">交通費</option>
-                    <option value="インセンティブ">インセンティブ</option>
-                    <option value="役職手当">役職手当</option>
-                    <option value="欠勤控除">欠勤控除</option>
-                    <option value="所得税">所得税</option>
-                    <option value="社会保障費">社会保障費</option>
-                </select><br>
-                
-                <label for="amount">手当・控除額:</label>
-                <input type="number" name="amount" required>
-                <small>控除の場合はマイナスにしてください</small>
+    <div class="confirm_salary-container">
+        <form action="{% url 'hr_assist:confirm_salary' emp_id=employee.id %}" method='post'>
+            {% csrf_token %}
+            <p>
+                <label for="employee" class="form_label">従業員</label>
+                {{ form.employee }}
+            </p>
+            <p>
+                <label for="paymonth" class="form_label">支給年月</label>
+                {{ form.paymonth }}
+                &emsp;<small>2000-01-01 の形式で入力してください</small>
+            </p>
+            
+            <div id="allowance-container">
+                <div class="allowance-item">
+                    <p>
+                        <label for="name" class="form_label">手当・控除名</label>
+                        <select name="name">
+                            <option value="交通費">交通費</option>
+                            <option value="インセンティブ">インセンティブ</option>
+                            <option value="役職手当">役職手当</option>
+                            <option value="欠勤控除">欠勤控除</option>
+                            <option value="所得税">所得税</option>
+                            <option value="社会保障費">社会保障費</option>
+                        </select>
+                    </p>
+                    <p>    
+                        <label for="amount" class="form_label">手当・控除額</label>
+                        <input type="number" name="amount" required> 円
+                        &emsp;<small>控除の場合はマイナスにしてください</small>
+                    </p>
+                </div>
             </div>
-        </div>
-    
-        <button type="submit">送信</button>
-    </form>
+        
+            <button type="submit" class="btn btn-primary">送信</button>
+            <button type="reset" class="btn btn-custom">キャンセル</button>
+        </form>
+    </div>
     
 {% endblock content %}

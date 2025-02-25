@@ -1,9 +1,13 @@
 {% extends "hr_assist/base.html" %}
 
-{% block content %}
-    <p>従業員一覧<p>
+{% block page_header%}
+    <h4>従業員一覧</h4>
+    <hr>
+{% endblock page_header %}
 
-    <ul>
+{% block content %}
+
+    <ul class="employees">
         {% for employee in employees %}
             <li>
                 <a href="{% url 'hr_assist:employee' employee.id %}">{{ employee }}</a>

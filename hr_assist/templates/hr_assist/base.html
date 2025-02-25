@@ -97,15 +97,15 @@
         </nav>
 
         <main role="main" class="container">
+            {% if user.is_authenticated %}
+                    <p class="hello">
+                        ようこそ　{{ user.username }} 様
+                    </p>
+            {% endif %}
             <div class="pb-2 mb-2">
                 {% block page_header %} {% endblock page_header %}
             </div>
             <div>
-                {% if user.is_authenticated %}
-                    <p class="hello">
-                        ようこそ　{{ user.username }} 様
-                    </p>
-                {% endif %}
                 {% block content %} {% endblock content %}
             </div>
         </main>

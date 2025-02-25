@@ -1,19 +1,28 @@
 {% extends "hr_assist/base.html" %}
 {% load humanize %}
 
-{% block content %}
-    <p>{{ employee.sei }} {{ employee.mei }}</p>
+{% block page_header %}
+    <h4>
+        {{ employee.sei }} {{ employee.mei }}
+    </h4>
+    <hr>
+{% endblock page_header %}
 
-    <p>氏名　　　　　　　{{ employee.sei }} {{ employee.mei }}</p>
-    <p>生年月日　　　　　{{ employee.birth_date|date:'Y年m月d日'}}</p>
-    <p>年齢　　　　　　　{{ employee.calculate_age }}歳</p>
-    <p>性別　　　　　　　{{ employee.gender }}</p>
-    <p>基本給　　　　　　{{ employee.basic_salary|intcomma}}円</p>
-    <p>入社日　　　　　　{{ employee.joining_date|date:'Y年m月d日' }}</p>
-    <p>ステータス　　　　{{ employee.get_status_display }}</p>
+{% block content %}
+    <div class="employee-detail">
+        <p>氏名　　　　　　　{{ employee.sei }} {{ employee.mei }}</p>
+        <p>生年月日　　　　　{{ employee.birth_date|date:'Y年m月d日'}}</p>
+        <p>年齢　　　　　　　{{ employee.calculate_age }}歳</p>
+        <p>性別　　　　　　　{{ employee.gender }}</p>
+        <p>基本給　　　　　　{{ employee.basic_salary|intcomma}}円</p>
+        <p>入社日　　　　　　{{ employee.joining_date|date:'Y年m月d日' }}</p>
+        <p>ステータス　　　　　 {{ employee.get_status_display }}</p>
     {% if user.is_staff %}
-        <a href="{% url 'hr_assist:confirm_salary' emp_id %}">給与情報の登録</a>
-        <a href="{% url 'hr_assist:salary' emp_id this_month %}">給与情報の閲覧</a>
-        <a href="{% url 'hr_assist:employees' %}">従業員一覧に戻る</a>
-    {% endif %}            
+        <div class="container">
+            <button class="btn btn-custom btn-detail" onclick="location.href='{% url 'hr_assist:confirm_salary' emp_id %}'">給与情報の登録</button>
+            <button class="btn btn-custom btn-detail" onclick="location.href='{% url 'hr_assist:salary' emp_id this_month %}'">給与情報の閲覧</button>
+            <button class="btn btn-custom btn-detail" onclick="location.href='{% url 'hr_assist:employees' %}'">従業員一覧に戻る</button>
+        </div>
+    {% endif %}  
+    </div>          
 {% endblock content %}

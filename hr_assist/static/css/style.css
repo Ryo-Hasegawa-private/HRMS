@@ -25,16 +25,32 @@
     padding-right: 2rem;
     padding-left: 2rem;
 }
+.btn-custom {
+    font-family: "ＭＳ 明朝", serif !important;
+    font-weight: bold !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    margin-left: 3rem !important;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    background-color: #ffffff;
+    color: #0d6efd;
+    border: #0d6efd 1px solid;
+}
 
 /* ページヘッダー部分 */
 .hello {
-    font-size: 1.5rem;
-    margin-left: 1px;
-    margin-top: 1.5rem;
-}
-h3 {
-    margin-top: 1.5rem;
+    font-size: 1rem;
+    font-family: "ＭＳ 明朝", serif;
     font-weight: bold;
+    margin-left: -50px;
+    margin-top: 0.5rem;
+}
+h4 {
+    font-family: "ＭＳ 明朝", serif !important;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
 }
 
 /* ページコンテンツ部分 */
@@ -48,3 +64,55 @@ h3 {
 .title .main {
     font-size: 3rem;
 }
+
+/* 従業員登録フォーム */
+.form-container {
+    display: block;
+    margin-left: 20rem;
+}
+.form_label {
+    margin-right: 10px;
+}
+.gender {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn-detail {
+    padding: 10rem 10px;  /* 高さを調整 */
+    font-size: 1rem;  /* フォントサイズを調整 */
+    margin: 0.5rem;  /* ボタン間の余白を調整 */
+    max-width: 250px;  /* 最大幅を制限 */
+    margin-top: 40px;
+}
+
+/* 従業員一覧 */
+.employees {
+    list-style-type: none;
+    text-align: center;
+    line-height: 50px;
+}
+
+/* 従業員情報 */
+.employee-detail {
+    display: block;
+    margin-left: 25rem;
+    line-height: 2.5;
+}
+.employee-detail .container {
+    display: flex;
+    flex-direction: row;
+    margin-left: -200px;
+    padding: 1px;
+}
+
+/* 給与情報の登録 */
+.confirm_salary-container {
+    display: block;
+    margin-left: 20rem;
+}
+.confirm_salary-container .btn {
+    margin-top: 20px;
+}
+
+/* 給与明細 */
