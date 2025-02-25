@@ -1,5 +1,7 @@
 {% extends "hr_assist/base.html" %}
 
+
+
 {% block page_header%}
     <h4>従業員情報登録</h4>
     <hr>
@@ -62,7 +64,18 @@
                     </div>
                 {% endif %}
             </div>
-            <br><br>    
+            <br><br>
+            <!-- メールアドレス　-->
+            <label for="{{ form.email.id_for_label }}" class="form_label">メールアドレス</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br><br><br>   
             <!-- 基本給　-->
             <label for="{{ form.basic_salary.id_for_label }}" class="form_label">基本給</label>
             {{ form.basic_salary }} 円
@@ -97,9 +110,21 @@
                 </div>
             {% endif %}
             <br><br><br>
-        <button name="submit" class="btn btn-primary">登録</button>
+        <button name="submit" class="btn btn-primary" onclick="winconf()">登録</button>
         <button type="reset" class="btn btn-custom">キャンセル</button>
     </form>
 </div>
 
 {% endblock content %}
+
+{% block scripts %}
+<script>
+    function winconf() {
+        var isConfirmed = window.confirm("入力した内容で従業員を登録しますがよろしいですか？");
+        if (!isConfirmed) {
+            return false; // キャンセルの場合、送信を防ぐ
+        }
+        return true; // OKの場合、送信を続行
+    }
+</script>
+{% endblock scripts %}

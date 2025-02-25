@@ -64,7 +64,7 @@ class Employee(models.Model):
         return '不明'
     
     # `User` モデルとの関連
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='employee')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='employee', null=True, blank=True)
     
     def __str__(self):
         """モデルの文字列表現を返す"""
@@ -98,38 +98,6 @@ class Allowance(models.Model):
         for deduction in deductions:
             if deduction.amount < 0:
                 total_deduction += deduction.amount
-        return total_deduction     
-                
+        return total_deduction
         
 
-
-    
-        
-
-class AllowanceList(models.Model):
-    """手当リストを表すモデル"""
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)  # 従業員ID（FK）
-    allowance = models.ForeignKey(Allowance, on_delete=models.CASCADE)  # 手当ID（FK）
-
-    class Meta:
-        # 'employee' と 'allowance' の組み合わせがユニークであることを指定
-        constraints = [
-            models.UniqueConstraint(fields=['employee', 'allowance'], name='unique_employee_allowance')
-        ]
-        
-    def __str__(self):
-        return f'{self.employee.sei} {self.employee.mei}-{self.allowance.name}({self.allowance.paymonth})'
-        
-class Salary:
-    """給与のクラス"""
-    
-    def __init__(self, employee, paymonth):
-        self.employee = employee
-        self.paymonth = paymonth
-    
-    def calculate(self):
-        """給料計算をして返す"""
-        basic_salary = self.employee.basic_salary
-        total_allowance = Allowance.total_allowance(self.employee, self.paymonth)
-        total_salary = basic_salary + total_allowance
-        return total_salary

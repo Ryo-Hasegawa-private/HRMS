@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from .models import Employee, Salary, Allowance
+from .models import Employee, Allowance
 from .forms import EmployeeForm
 from .forms import SalaryForm
 from plotly.graph_objects import Histogram, Layout, Pie
@@ -86,25 +86,6 @@ def confirm_salary(request, emp_id):
     context = {'form': form, 'employee': employee}
     return render(request, 'hr_assist/confirm_salary.html', context)
 
-
-"""def confirm_salary(request):
-    #給与情報を登録する
-    if request.method != 'POST':
-        # データは送信されていないので空のフォームを生成する
-        form = SalaryForm()
-    else:
-        # POSTでデータが送信されたのでこれを処理する
-        form = SalaryForm(data=request.POST)
-        if form.is_valid():
-            # YYYY-MM 形式の paymonth を作成
-            paymonth = f"{form.cleaned_data['year']}-{form.cleaned_data['month']}"
-            return redirect('hr_assist:confirm_salary')
-        
-    # 空または無効のフォームを表示する
-    context = {'form': form}
-    return render(request, 'hr_assist/confirm_salary.html', context)
-"""
-
 @login_required
 def salary(request, emp_id, paymonth):
     
@@ -189,7 +170,17 @@ def insight(request):
     my_layout_age= Layout(title='年齢の分布', xaxis=x_axis_config_age, 
                        yaxis=y_axis_config_age, bargap=0.1)
     
-    my_layout_gender = Layout(title='男女比')
+    my_layout_gender = Layout(
+        title='男女比',
+        legend=dict(  # legend属性をdict型で追加
+            orientation="h",
+            yanchor="bottom",
+            y=-0.2,
+            xanchor="center",
+            x=0.5
+        ),
+    )
+    
     
     x_axis_config_basic_salary = {'title': '基本給', 'dtick': 100000}
     y_axis_config_basic_salary = {'title': '人数'}
@@ -241,6 +232,8 @@ def insight(request):
         'average_age': average_age,
         'min_age': min_age,
         'max_age': max_age,
+        'male_count': male_count,
+        'female_count': female_count,
         'average_basic_salary': average_basic_salary,
     }
     

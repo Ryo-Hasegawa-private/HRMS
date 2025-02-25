@@ -31,26 +31,36 @@
     });
   </script>
 
+<div class="table-container-block">
   <!-- 差引給与額テーブル -->
-  <table border="1">
+  <table class="table-1">
     <tr>
       <td>差引給与額</td>
       <td>{{ total_salary|intcomma }}円</td>
     </tr>
   </table>
 
+  <div class="table-container-flex">
   <!-- 支給テーブル -->
-    <table border="1">
+    <table class="table-2">
       <tr>
-        <th></th>
+        <th class="backslash"></th>
         <th>項目</th>
         <th>金額</th>
       </tr>
+      {% if allowances|length > 0 %}
       <tr>
-        <td rowspan="{{ allowances|length|add:1 }}">支給</td>
+        <td rowspan="{{ allowances|length|add:2}}">支給</td>
         <td>基本給</td>
         <td>{{ employee.basic_salary|intcomma }}円</td>
       </tr>
+      {% else %}
+      <tr>
+        <td rowspan="2">支給</td>
+        <td>基本給</td>
+        <td>{{ employee.basic_salary|intcomma }}円</td>
+      </tr>
+      {% endif %}
       {% for allowance in allowances %}
       {% if allowance.amount > 0 %}
       <tr>
@@ -58,30 +68,24 @@
         <td>{{ allowance.amount|intcomma }}円</td>
       </tr>
       {% endif %}
-      {% empty %}
-        <td></td>
-        <td>no data</td>
-        <td>no data</td>
       {% endfor %}
       <tr>
         <td>合計</td>
-        <td>{{ total_allowance|intcomma }}円</td>
+        <td>{{ employee.basic_salary|add:total_allowance|intcomma }}円</td>
       </tr>
     </table>
 
     <!-- 控除テーブル -->
-    <table border="1">
+    <table class="table-3">
       <tr>
-        <th></th>
+        <th class="backslash"></th>
         <th>項目</th>
         <th>金額</th>
       </tr>
       {% with deductions=allowances %}
         {% if deductions|length > 0 %}
           <tr>
-            <td rowspan="{{ deductions|length }}">控除</td>
-            <td>{{ deductions.0.name }}</td>
-            <td>{{ deductions.0.amount|intcomma }}円</td>
+            <td rowspan="{{ deductions|length|add:2 }}">控除</td>
           </tr>
         {% for deduction in deductions %}
           {% if deduction.amount < 0 %}
@@ -93,7 +97,7 @@
         {% endfor %}
       {% else %}
         <tr>
-          <td></td>
+          <td rowspan="2">控除</td>
           <td>no data</td>
           <td>no data</td>
         </tr>
@@ -101,38 +105,12 @@
     {% endwith %}
       <tr>
         <td>合計</td>
-        <td>{{ total_allowance|intcomma }}円</td>
+        <td>{{ total_deduction|intcomma }}円</td>
       </tr>
     </table>
+</div>
+</div>
 
 
-      <h3>手当</h3>
-      <ul>
-        {% for allowance in allowances %}
-          {% if allowance.amount > 0 %}
-            <li>{{ allowance.name }} {{ allowance.amount|intcomma }}円</li>
-          {% endif %}
-        {% empty %}
-          <li>no data</li>
-        {% endfor %}
-        差引給与額 {{ total_allowance|intcomma }}円
-      </ul>
-    
-
-  <h3>控除</h3>
-  <ul>
-    {% for allowance in allowances %}
-      {% if allowance.amount < 0 %}
-        <li>{{ allowance.name }} {{ allowance.amount|intcomma }}円</li>
-      {% endif %}
-    {% empty %}
-      <li>no data</li>
-    {% endfor %}
-    合計 {{ total_deduction|intcomma }}円
-  </ul>
-
-  <p>
-    合計 {{ total_salary|intcomma }}円
-  </p>
 
 {% endblock %}

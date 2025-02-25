@@ -3,18 +3,27 @@
 
 {% block content %}
 
+<div class="age-container">
 {{ graph_age|safe }}
-
+<div class="age-list">
     <p>従業員数　{{ dic.total_employee }}人</p>
     <p>平均年齢　{{ dic.average_age }}歳</p>
     <p>最低年齢　{{ dic.min_age }}歳</p>
     <p>最高年齢　{{ dic.max_age }}歳</p>
+</div>
+</div>
 
+<div class="gender-container">
 {{ graph_gender|safe }}
+<div class="gender-liset">
+    <p>男性　{{ dic.male_count }}人</p>
+    <p>女性　{{ dic.female_count }}人</p>
+</div>
+</div>
 
-
+<div class="salary-container">
 {{ graph_basic_salary|safe }}
-
-<p>平均基本給　{{ dic.average_basic_salary|intcomma }}円</p>
+<p class="salary-list">平均基本給　{{ dic.average_basic_salary|intcomma }}円</p>
+</div>
 
 {% endblock content %}

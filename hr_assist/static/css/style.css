@@ -116,3 +116,66 @@ h4 {
 }
 
 /* 給与明細 */
+table {
+    border-collapse: collapse; /* セル間の境界線を結合 */
+    text-align: center;
+}
+
+table, td, th {
+    border: 1px solid black; /* 境界線のスタイルを指定 */
+}
+.backslash {
+    background-image: linear-gradient(to right top, transparent calc(50% - 0.5px), #000000 50%, #000000 calc(50% + 0.5px), transparent calc(50% + 1px));
+    background-repeat: no-repeat; /* 画像の繰り返しを防止 */
+    background-size: 100% 100%; /* セルに合わせてグラデーションを拡大縮小 */
+}
+
+.table-1 {
+    height: 50px;
+    width: 300px;
+    margin-left: auto;
+}
+
+.table-2 {
+    height: 200px;
+    width: 500px;
+    flex-grow: 1;
+}
+.table-3 {
+    height: 200px;
+    width: 500px;
+    flex-grow: 1;
+}
+.table-container-flex {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
+.table-container-block {
+    display: flex;
+    flex-flow: column;
+    gap: 30px;
+}
+/* インサイト */
+.age-container {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
+.age-list {
+    margin-top: 100px;
+}
+.gender-container {
+    display: flex;
+    gap: 100px;
+}
+.gender-liset {
+    margin-top: 100px;
+}
+.salary-container {
+    display: flex;
+    gap: 100px;
+}
+.salary-list {
+    margin-top: 100px;
+}
