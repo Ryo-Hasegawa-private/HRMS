@@ -134,8 +134,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 NUMBER_GROUPING = 3
 
-STATICFILES_DIRS = (
-    [
-        os.path.join(BASE_DIR, "static"), 
-    ]
-)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]

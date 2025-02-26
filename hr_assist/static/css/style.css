@@ -16,12 +16,17 @@
     width: 100%;  /* 幅を100%に */
     max-width: 200px;  /* 最大幅は200pxに制限 */
 }
+.nav-item:hover {
+    text-decoration: underline;
+    text-decoration-color: #00ffff;
+    text-underline-offset: 10px;
+}
 .btn-primary {
     font-family: "ＭＳ 明朝", serif !important;
     font-weight: bold !important;
     padding-top: 0.5rem !important;
     padding-bottom: 0.5rem !important;
-    margin-right: 1rem !important;
+    /* margin-right: 1rem !important; */
     padding-right: 2rem;
     padding-left: 2rem;
 }
@@ -67,8 +72,12 @@ h4 {
 
 /* 従業員登録フォーム */
 .form-container {
-    display: block;
-    margin-left: 20rem;
+    max-width: 800px;  
+    width: 95%;  /* 親要素に合わせて幅を100%に */
+    margin: 0 auto;  /* 左右の余白を自動で調整して中央揃え */
+    padding: 1rem;  /* フォームに余白を追加 */
+    box-sizing: border-box;  /* パディングの影響を幅に含める */
+    margin-left: 300px;
 }
 .form_label {
     margin-right: 10px;
@@ -178,4 +187,14 @@ table, td, th {
 }
 .salary-list {
     margin-top: 100px;
+}
+
+.navbar-nav .nav-item {
+    margin-bottom: 1rem;
+}
+
+/* レスポンシブデザイン */
+
+@media (max-width: 480px) {
+    
 }

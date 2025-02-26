@@ -96,9 +96,9 @@ def salary(request, emp_id, paymonth):
     user_id = str(request.user.username).lstrip('0')
     
     if emp_id == user_id or request.user.is_staff:
-    
-    # 従業員と支給年月を取得
+        # 従業員と支給年月を取得
         employee = Employee.objects.get(id=emp_id)
+        
     today = datetime.today()
     # `YYYY-MM`形式の文字列に変換
     this_month = today.strftime('%Y-%m')  # 例: '2025-02'
@@ -108,14 +108,14 @@ def salary(request, emp_id, paymonth):
     
 
     # 合計手当と合計控除を取得
-    total_allowance = Allowance.total_allowance(emp_id, paymonth)  # クラスメソッド呼び出し
-    total_deduction = Allowance.total_deduction(emp_id, paymonth)  # クラスメソッド呼び出し
+    total_allowance = Allowance.total_allowance(emp_id, paymonth)  
+    total_deduction = Allowance.total_deduction(emp_id, paymonth)  
     total_salary = employee.basic_salary + total_allowance + total_deduction
     context = {
         'employee': employee,
         'allowances': allowances,
         'paymonth': paymonth,
-        'total_allowance': total_allowance,  # 合計手当を渡す
+        'total_allowance': total_allowance,  
         'total_deduction': total_deduction,
         'total_salary': total_salary,
         'all_emp': all_emp,
@@ -238,6 +238,7 @@ def insight(request):
         'male_count': male_count,
         'female_count': female_count,
         'average_basic_salary': average_basic_salary,
+        'active_employees': active_employees,
     }
     
     # テンプレートに渡す

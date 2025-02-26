@@ -1,7 +1,5 @@
 {% extends "hr_assist/base.html" %}
 
-
-
 {% block page_header%}
     <h4>従業員情報登録</h4>
     <hr>
@@ -110,7 +108,7 @@
                 </div>
             {% endif %}
             <br><br><br>
-        <button name="submit" class="btn btn-primary" onclick="winconf()">登録</button>
+        <button name="submit" class="btn btn-primary">登録</button>
         <button type="reset" class="btn btn-custom">キャンセル</button>
     </form>
 </div>
@@ -118,13 +116,4 @@
 {% endblock content %}
 
 {% block scripts %}
-<script>
-    function winconf() {
-        var isConfirmed = window.confirm("入力した内容で従業員を登録しますがよろしいですか？");
-        if (!isConfirmed) {
-            return false; // キャンセルの場合、送信を防ぐ
-        }
-        return true; // OKの場合、送信を続行
-    }
-</script>
 {% endblock scripts %}

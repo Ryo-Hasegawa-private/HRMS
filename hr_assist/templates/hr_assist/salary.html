@@ -110,6 +110,11 @@
     </table>
 </div>
 </div>
+{% if user.is_staff %}
+<div style="margin: 0px 425px;">
+    <button class="btn btn-custom btn-detail" onclick="location.href='{% url 'hr_assist:employees' %}'">従業員一覧に戻る</button>
+</div>
+{% endif %}  
 
 
 
