@@ -8,6 +8,7 @@ from plotly import offline
 from datetime import datetime
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+import statistics
 
 def index(request):
     """人事労務くんのホームページ"""
@@ -230,6 +231,10 @@ def insight(request):
     else:
         average_basic_salary = 0
     
+    # 基本給の中央値
+    median_baisc_salary = statistics.median(basic_salaries)
+    mode_basic_salary = statistics.mode(basic_salaries)
+    
     dic = {
         'total_employee': total_employee,
         'average_age': average_age,
@@ -239,6 +244,8 @@ def insight(request):
         'female_count': female_count,
         'average_basic_salary': average_basic_salary,
         'active_employees': active_employees,
+        'median_baisc_salary': median_baisc_salary,
+        'mode_basic_salary': mode_basic_salary,
     }
     
     # テンプレートに渡す
