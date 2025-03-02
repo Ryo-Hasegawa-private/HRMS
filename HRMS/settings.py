@@ -153,3 +153,9 @@ DEBUG = env('DEBUG')
 SUPERUSER_NAME = env("SUPERUSER_NAME")
 SUPERUSER_EMAIL = env("SUPERUSER_EMAIL")
 SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD")
+
+# settings.py
+SESSION_COOKIE_DOMAIN = '.hrms-iu01.onrender.com'  # Renderのドメイン名
+CSRF_COOKIE_DOMAIN = '.hrms-iu01.onrender.com'
+
+LOGIN_REDIRECT_URL = '/'  # ログイン後にリダイレクトするURL
