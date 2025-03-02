@@ -103,3 +103,6 @@ STATICFILES_DIRS = [
 SUPERUSER_NAME = env("SUPERUSER_NAME")
 SUPERUSER_EMAIL = env("SUPERUSER_EMAIL")
 SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD")
+
+# settings.py
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # データベースセッションを使用
