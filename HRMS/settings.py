@@ -15,6 +15,10 @@ import os
 import environ
 from decouple import config
 from dj_database_url import parse as dburl
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -155,4 +159,4 @@ SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD")
 
 CSRF_COOKIE_SECURE = not DEBUG  # 開発環境では False
 CSRF_COOKIE_HTTPONLY = True  # CSRFトークンをJavaScriptで取得できるようにする
-SESSION_COOKIE_SECURE = not DEBUG  # ログインセッションも開発環境では HTTP で動作させる
+SESSION_COOKIE_SECURE = False  # ログインセッションも開発環境では HTTP で動作させる
