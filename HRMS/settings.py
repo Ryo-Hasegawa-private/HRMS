@@ -160,3 +160,5 @@ SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD")
 CSRF_COOKIE_SECURE = not DEBUG  # 開発環境では False
 CSRF_COOKIE_HTTPONLY = True  # CSRFトークンをJavaScriptで取得できるようにする
 SESSION_COOKIE_SECURE = False  # ログインセッションも開発環境では HTTP で動作させる
+
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
