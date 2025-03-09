@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-6sxuji-63b=iuc0e3@t3f!&b)f#9gdf6!2q-)yji2)d97^+(+y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hrms-iu01.onrender.com', 'localhost', '127.0.0.1' ]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -132,7 +132,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT=str(BASE_DIR/"staticfiles")
-STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -142,7 +142,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 NUMBER_GROUPING = 3
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
 ]
 
 env = environ.Env()
@@ -154,8 +153,6 @@ SUPERUSER_NAME = env("SUPERUSER_NAME")
 SUPERUSER_EMAIL = env("SUPERUSER_EMAIL")
 SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD")
 
-# settings.py
-SESSION_COOKIE_DOMAIN = '.hrms-iu01.onrender.com'  # Renderのドメイン名
-CSRF_COOKIE_DOMAIN = '.hrms-iu01.onrender.com'
-
-LOGIN_REDIRECT_URL = '/'  # ログイン後にリダイレクトするURL
+CSRF_COOKIE_SECURE = False  # 開発環境では False
+CSRF_COOKIE_HTTPONLY = False  # CSRFトークンをJavaScriptで取得できるようにする
+SESSION_COOKIE_SECURE = False  # ログインセッションも開発環境では HTTP で動作させる
