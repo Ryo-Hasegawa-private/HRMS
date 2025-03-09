@@ -153,6 +153,6 @@ SUPERUSER_NAME = env("SUPERUSER_NAME")
 SUPERUSER_EMAIL = env("SUPERUSER_EMAIL")
 SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD")
 
-CSRF_COOKIE_SECURE = False  # 開発環境では False
-CSRF_COOKIE_HTTPONLY = False  # CSRFトークンをJavaScriptで取得できるようにする
-SESSION_COOKIE_SECURE = False  # ログインセッションも開発環境では HTTP で動作させる
+CSRF_COOKIE_SECURE = not DEBUG  # 開発環境では False
+CSRF_COOKIE_HTTPONLY = True  # CSRFトークンをJavaScriptで取得できるようにする
+SESSION_COOKIE_SECURE = not DEBUG  # ログインセッションも開発環境では HTTP で動作させる
